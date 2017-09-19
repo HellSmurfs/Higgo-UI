@@ -111,7 +111,7 @@ var MainView = new MAF.Class({
   },
 
   updateView: function (data) {
-    screen.log(data);
+    screen.log(JSON.stringify(data));
 
     // var parsed_data = JSON.parse(data);
 
@@ -135,7 +135,7 @@ var MainView = new MAF.Class({
     ];
     var parsed_data = test_data;
 
-    screen.log(parsed_data);
+    screen.log(JSON.stringify(parsed_data));
 
     var grouped_dates = {
     };
