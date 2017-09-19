@@ -1,0 +1,17 @@
+{
+	"identifier": "com.irdeto.app.Higgo",
+	"name": "Higgo",
+	"version": "0.0.1",
+	"author": "Irdeto Hell Smurfs",
+	"company": "Irdeto",
+	"copyright": "Irdeto",
+	"description": "Find artists/bands playing near you.",
+	"categories": [ "video" ],
+	"scripts": "Javascript/init.js",
+	"images": {
+		"about": "Images/irdeto.png",
+		"icon": {
+			"192x192": "Images/hs.png"
+		}
+	}
+}
