@@ -111,37 +111,42 @@ var MainView = new MAF.Class({
   },
 
   updateView: function (data) {
-    // this.elements.ourText.setText(JSON.stringify(data));
-    // var test_data = [
-    //   {
-    //     venue: 'The O2 Arena',
-    //     geometry: {lat: 51.5073509, lon: -0.1277583},
-    //     styles: ['Heavy metal', 'thrash metal'],
-    //     date: '2017-10-22',
-    //     location: 'London, England',
-    //     bandName: 'Metallica'
-    //   },
-    //   {
-    //     venue: 'The O2 Arena',
-    //     geometry: {lat: 51.5073509, lon: -0.1277583},
-    //     styles: ['Heavy metal', 'thrash metal'],
-    //     date: '2017-10-24',
-    //     location: 'London, England',
-    //     bandName: 'Metallica'
-    //   }
-    // ];
-    // var parsed_data = test_data;
-    var parsed_data = JSON.parse(data);
+    screen.log(data);
+
+    // var parsed_data = JSON.parse(data);
+
+    var test_data = [
+      {
+        venue: 'The O2 Arena',
+        geometry: {lat: 51.5073509, lon: -0.1277583},
+        styles: ['Heavy metal', 'thrash metal'],
+        date: '2017-10-22',
+        location: 'London, England',
+        bandName: 'Metallica'
+      },
+      {
+        venue: 'The O2 Arena',
+        geometry: {lat: 51.5073509, lon: -0.1277583},
+        styles: ['Heavy metal', 'thrash metal'],
+        date: '2017-10-24',
+        location: 'London, England',
+        bandName: 'Metallica'
+      }
+    ];
+    var parsed_data = test_data;
+
+    screen.log(parsed_data);
 
     var grouped_dates = {
     };
 
-    parsed_data.forEach(function (t) {
-      if (!grouped_dates[t.bandName]) {
-        grouped_dates[t.bandName] = [];
+    for (var i=0; i < parsed_data.length; i++) {
+      var item = parsed_data[i];
+      if (!grouped_dates[item.bandName]) {
+        grouped_dates[item.bandName] = [];
       }
-      grouped_dates[t.bandName].push(t);
-    });
+      grouped_dates[item.bandName].push(item);
+    }
 
     var grouped_arr = [];
 
