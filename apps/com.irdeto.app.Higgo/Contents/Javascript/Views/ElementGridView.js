@@ -25,7 +25,7 @@ var ElementGridView = new MAF.Class( {
           events:{
             onSelect: function() {
               log( 'onSelect function GridCell', this.getCellIndex() );
-              MAF.application.loadView('view-MapView', {
+              MAF.application.loadView('view-InfoView', {
           		myData: [1, 2, 3]
         		});
             },
