@@ -1,14 +1,16 @@
 // Include your views
 include( 'Javascript/Views/MainView.js' );
 include( 'Javascript/Views/MapView.js' );
+<<<<<<< HEAD
 include( 'Javascript/Views/InfoView.js' );
 include( 'Javascript/Views/ElementGridView.js' );
+=======
+>>>>>>> origin/event
 
 // Init application with view config
 MAF.application.init( {
 	views: [
 		{ id: 'view-MainView', viewClass: MainView },
-		{ id: 'view-ElementGridView', viewClass: ElementGridView },
 		{ id: 'view-MapView', viewClass: MapView },
 		{ id: 'view-InfoView', viewClass: InfoView },
 		{ id: 'view-About', viewClass: MAF.views.AboutBox } // Use standard About view
