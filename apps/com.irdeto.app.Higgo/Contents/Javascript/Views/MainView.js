@@ -4,10 +4,14 @@ var MainView = new MAF.Class({
 
   initialize: function () {
     this.parent();
+    MAF.mediaplayer.init();
   },
 
   iotListener: function (evt) {
-    screen.log(JSON.stringify(evt));
+    if (evt.payload.e && evt.payload.e === "higgo") {
+      var data = evt.payload.meta.messages[0];
+      this.updateView(data);
+    }
   },
 
   createView: function () {
@@ -55,7 +59,8 @@ var MainView = new MAF.Class({
     }).appendTo(this);
   },
 
-  updateView: function () {
+  updateView: function (data) {
+    this.elements.ourText.setText(JSON.stringify(data));
   },
 
   destroyView: function () {
