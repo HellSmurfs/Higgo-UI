@@ -1,34 +1,41 @@
-var MainView = new MAF.Class( {
+var MainView = new MAF.Class({
   ClassName: 'MainView',
   Extends: MAF.system.SidebarView,
 
-  initialize: function() {
+  initialize: function () {
     this.parent();
   },
 
-  createView: function() {
-  	this.elements.ourText = new MAF.element.Text( {
-    label: $_('Playing near you...'),
-    styles:{
-      width: this.width,
-      height: this.height,
-      fontSize: 60,
-      anchorStyle: 'center'
-    }
-  } ).appendTo( this );
+  iotListener: function (evt) {
+    screen.log(JSON.stringify(evt));
+  },
 
-  	// Create a Text element with translated label
-    var textButtonLabel = new MAF.element.Text( {
+  createView: function () {
+    this.IOTEvents = this.iotListener.subscribeTo(MAF.application, 'onIotEvent',
+        this);
+
+    this.elements.ourText = new MAF.element.Text({
+      label: $_('Playing near you...'),
+      styles: {
+        width: this.width,
+        height: this.height,
+        fontSize: 60,
+        anchorStyle: 'center'
+      }
+    }).appendTo(this);
+
+    // Create a Text element with translated label
+    var textButtonLabel = new MAF.element.Text({
       //label: $_('MAF.control.TextButton'),
       styles: {
         height: 40,
         width: 400,
         hOffset: ( this.width - 400 ) / 2
       }
-    } ).appendTo( this );
+    }).appendTo(this);
 
     // Create a Text button with a select event
-    var textButton = new MAF.control.TextButton( {
+    var textButton = new MAF.control.TextButton({
       label: $_('Load'),
       styles: {
         width: textButtonLabel.width,
@@ -36,17 +43,22 @@ var MainView = new MAF.Class( {
         hOffset: textButtonLabel.hOffset,
         vOffset: textButtonLabel.outerHeight
       },
-      textStyles: { anchorStyle: 'center' },
+      textStyles: {anchorStyle: 'center'},
       events: {
-        onSelect: function() {
+        onSelect: function () {
           log('onSelect function TextButton');
           MAF.application.loadView('view-ElementGridView', {
-          myData: [1, 2, 3]
-        });
+            myData: [1, 2, 3]
+          });
         }
       }
-    } ).appendTo( this );
-},
+    }).appendTo(this);
+  },
 
-  updateView: function() {}
-} );
+  updateView: function () {
+  },
+
+  destroyView: function () {
+    this.IOTEvents.unsubscribeFrom(MAF.application, 'onIotEvent');
+  }
+});
