@@ -62,6 +62,44 @@ var InfoView = new MAF.Class({
                       }
                   )
                 } else {
+                    if (0 === cell.getCellIndex()) {
+                        var strUrl;
+                        var bgUrl = new MAF.element.Image();
+                        var band = cell.getCellDataItem().data;
+                        band = band.toUpperCase();
+                        console.log(band, "band name");
+
+                        if (band  === 'RAMMSTEIN' ) {
+                            strUrl = 'http://www.zefmagazine.nl/wp-content/uploads/2015/10/rammstein.png';
+                        }
+                        if ( band === 'ARCH ENEMY' ) {
+                            strUrl = 'http://d2x72n33pz0l2n.cloudfront.net/media/catalog/category/aen-cat-ban_1.jpg'
+                        }if (band === 'EMINEM' ) {
+                            strUrl = 'https://ssld.ulximg.com/image/500x500crop/artist/1392769088_c6070ec80bccba3d78dd6278c88eb38b.jpg/1681076134f26eff1b62aab552dab07c/1392769088_recoveryapprovedcrop_19.jpg';
+                        }if (band  === 'METALLICA' ) {
+                            strUrl = 'https://s3.amazonaws.com/assets.codiqa.com/IiDCWiqLQkOaJSmkKfYM_metallica%20lightning.jpg';
+                        }if (band  === 'TAGADA JONES' ) {
+                            strUrl = 'http://www.spirit-of-metal.com/les%20goupes/T/Tagada%20Jones/pics/1214650_logo.jpg';
+                        }
+                         if (band  === 'LADY GAGA' ) {
+                            strUrl = 'http://www.billboard.com/files/media/Lady-gaga-performs-in-australia-2009-billboard-1548.jpg';
+                        }
+
+                       bgUrl.setSources ({
+                            //source: 'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyCyw0t8OLuv1gUat9Pn-nzsGthSg3NlMVk',
+                            source: strUrl,
+                            missingSrc: 'Images/hs.png'
+                        }).appendTo(cell);
+                        ( cell.animate(
+                            {
+                                backgroundImage: bgUrl
+                            }
+                        ));
+                        bgUrl.animate ({
+                            height: cell.height,
+                            width: cell.width
+                        });
+                    }
                     cell.title.setText(data.data);
                 }
             }

@@ -127,7 +127,7 @@ var MainView = new MAF.Class({
           styles: ['Heavy metal', 'thrash metal'],
           date: '2017-10-22',
           location: 'London, England',
-          bandName: 'Metallica'
+          bandName: 'Rammstein'
         },
         {
           venue: 'The O2 Arena',
@@ -154,12 +154,12 @@ var MainView = new MAF.Class({
           bandName: 'Lady Gaga'
         },
         {
-          venue: 'Test',
+          venue: 'Vienna Hall',
           geometry: {lat: 51.5073509, lon: -0.1277583},
-          styles: ['Test'],
-          date: '2017-10-23',
-          location: 'Amsterdam, Netherlands',
-          bandName: 'Test'
+          styles: ['Opera'],
+          date: '2017-09-30',
+          location: 'Vienna, Austria',
+          bandName: 'Aida Garifulina'
         }
       ];
       parsed_data = test_data;
