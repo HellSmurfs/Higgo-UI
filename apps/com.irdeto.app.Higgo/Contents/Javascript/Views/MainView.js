@@ -8,10 +8,10 @@ var MainView = new MAF.Class({
   },
 
   iotListener: function (evt) {
-    screen.log("      event: " + JSON.stringify(evt));
+    // screen.log("      event: " + JSON.stringify(evt));
     if (evt.payload.e && evt.payload.e === "higgo") {
-      var data = JSON.stringify(evt.payload.meta.messages[0]);
-      screen.log("      stringify_message: " + JSON.stringify(data));
+      var data = evt.payload.meta.messages[0];
+      // screen.log("      message: " + data);
       this.updateView(data);
     }
   },
@@ -113,11 +113,11 @@ var MainView = new MAF.Class({
   },
 
   updateView: function (data) {
-    screen.log("      data_param: " + JSON.stringify(data));
+    // screen.log("      data_param: " + data);
     var parsed_data;
     if (data) {
-      screen.log("      refine_string: " + JSON.stringify(
-          JSON.parse(data.split("\'").join("\""))));
+      // screen.log("      refine_string: " + JSON.stringify(
+      //     JSON.parse(data.split("\'").join("\""))));
       parsed_data = JSON.parse(data.split("\'").join("\""));
     } else {
       var test_data = [
@@ -165,7 +165,7 @@ var MainView = new MAF.Class({
       parsed_data = test_data;
     }
 
-    screen.log("      parsed_data: " + JSON.stringify(parsed_data));
+    // screen.log("      parsed_data: " + JSON.stringify(parsed_data));
 
     var grouped_dates = {};
 
