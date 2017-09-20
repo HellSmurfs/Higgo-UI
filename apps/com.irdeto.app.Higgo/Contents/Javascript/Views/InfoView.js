@@ -26,9 +26,12 @@ var InfoView = new MAF.Class({
 
                 var backgroundImage = new MAF.element.Image();
                 var urLBase = 'https://maps.googleapis.com/maps/api/staticmap?center=';
-                var locationText = 'Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&';
-                var coordinateInfo = 'markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyCyw0t8OLuv1gUat9Pn-nzsGthSg3NlMVk';
+                var locationText = this.getCellDataItem.location + ',AM&zoom=13&size=600x300&maptype=roadmap&';//'Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&';
+                var lat = this.getCellDataItem.geometry.lat;
+                var lon = this.getCellDataItem.geometry.lon;
+                var coordinateInfo = 'markers=color:blue%7Clabel:S%7C' + lat + ',' +lon+'&markers=color:green%7Clabel:G%7C'+lat + lon + ',' + '&markers=color:red%7Clabel:C%7C'+lat +','+lon + '&key=AIzaSyCyw0t8OLuv1gUat9Pn-nzsGthSg3NlMVk';
                 var imageStr = urLBase + locationText + coordinateInfo;
+                console.log(imageStr, " Url string");
                 backgroundImage.setSources({
                     //source: 'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyCyw0t8OLuv1gUat9Pn-nzsGthSg3NlMVk',
                     source: imageStr,
@@ -70,10 +73,21 @@ var InfoView = new MAF.Class({
     },
 
     updateView: function () {
-        this.elements.elementGrid.changeDataset([
-            {title: $_('Artist')},
+        // screen.log(JSON.stringify(data));
+
+    var band = this.persist.dates[0].bandName;
+    console.log(band, "band name");
+    var info = 'Playing at: ' + this.persist.dates[0].venue + ' on ' + this.persist.dates[0].date + ' in ' + this.persist.dates[0].location;
+    console.log(info, "band info");
+    this.elements.elementGrid.changeDataset([
+            {title: band},
             {title: $_('Map')},
-            {title: $_('Information')}
+            {title: info}
         ], true);
+    },
+
+    destroyView: function () {
+        this.IOTEvents.unsubscribeFrom(MAF.application, 'onIotEvent');
     }
+
 });

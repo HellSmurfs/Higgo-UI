@@ -8,7 +8,7 @@ var MainView = new MAF.Class({
   },
 
   iotListener: function (evt) {
-    if (evt.payload.e && evt.payload.e === "higgo") {
+    if (evt.payload.e && evt.payload.e === "Higgo") {
       var data = JSON.stringify(evt.payload.meta.messages[0]);
       this.updateView(data);
     }
@@ -39,7 +39,7 @@ var MainView = new MAF.Class({
           events: {
             onSelect: function () {
               log('onSelect function GridCell', this.getCellIndex());
-              MAF.application.loadView('view-MapView', {
+              MAF.application.loadView('view-InfoView', {
                 dates: this.getCellDataItem().data
               });
             },
@@ -111,7 +111,7 @@ var MainView = new MAF.Class({
   },
 
   updateView: function (data) {
-    screen.log(JSON.stringify(data));
+    //screen.log(JSON.stringify(data));
 
     // var parsed_data = JSON.parse(data);
 
@@ -131,11 +131,27 @@ var MainView = new MAF.Class({
         date: '2017-10-24',
         location: 'London, England',
         bandName: 'Metallica'
-      }
+      },
+      {
+        venue: 'The O3 Arena',
+        geometry: {lat: 51.5073509, lon: -0.1277583},
+        styles: ['Hip Hop', 'rap'],
+        date: '2017-10-23',
+        location: 'Amsterdam, Netherlands',
+        bandName: 'Eminem'
+    },
+    {
+        venue: 'The O3 Arena',
+        geometry: {lat: 51.5073509, lon: -0.1277583},
+        styles: ['Pop', 'Alternative'],
+        date: '2017-10-26',
+        location: 'Amsterdam, Netherlands',
+        bandName: 'Lady Gaga'
+    }
     ];
     var parsed_data = test_data;
 
-    screen.log(JSON.stringify(parsed_data));
+    //screen.log(JSON.stringify(parsed_data));
 
     var grouped_dates = {
     };
