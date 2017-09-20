@@ -8,10 +8,9 @@ var MainView = new MAF.Class({
   },
 
   iotListener: function (evt) {
-    // screen.log("      event: " + JSON.stringify(evt));
     if (evt.payload.e && evt.payload.e === "higgo") {
-      var data = evt.payload.meta.messages[0];
-      // screen.log("      message: " + data);
+      var data = {};
+      data = evt.payload.meta.messages[0];
       this.updateView(data);
     }
   },
@@ -24,9 +23,6 @@ var MainView = new MAF.Class({
       label: $_('BACK')
     }).appendTo(this);
 
-    // In the ControlGridView.js example there is a guid, when guid is not needed
-    // but the element needs to be accessed outside the create view function
-    // you can reference elements in the view.elements object
     var elementGrid = this.elements.elementGrid = new MAF.element.Grid({
       rows: 2,
       columns: 2,
@@ -113,11 +109,8 @@ var MainView = new MAF.Class({
   },
 
   updateView: function (data) {
-    // screen.log("      data_param: " + data);
-    var parsed_data;
+    var parsed_data = [];
     if (data) {
-      // screen.log("      refine_string: " + JSON.stringify(
-      //     JSON.parse(data.split("\'").join("\""))));
       parsed_data = JSON.parse(data.split("\'").join("\""));
     } else {
       var test_data = [
@@ -164,8 +157,6 @@ var MainView = new MAF.Class({
       ];
       parsed_data = test_data;
     }
-
-    // screen.log("      parsed_data: " + JSON.stringify(parsed_data));
 
     var grouped_dates = {};
 
