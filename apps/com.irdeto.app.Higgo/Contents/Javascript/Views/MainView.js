@@ -8,9 +8,10 @@ var MainView = new MAF.Class({
   },
 
   iotListener: function (evt) {
-    if (evt.payload.e && evt.payload.e === "Higgo") {
+    screen.log("      event: " + JSON.stringify(evt));
+    if (evt.payload.e && evt.payload.e === "higgo") {
       var data = JSON.stringify(evt.payload.meta.messages[0]);
-      screen.log(data);
+      screen.log("      stringify_message: " + JSON.stringify(data));
       this.updateView(data);
     }
   },
@@ -112,54 +113,63 @@ var MainView = new MAF.Class({
   },
 
   updateView: function (data) {
-    //screen.log(JSON.stringify(data));
-    if (data)
-      screen.log(JSON.parse(data.split("\'").join("\"")));
-
-    // var parsed_data = JSON.parse(data);
-
-    var test_data = [
-      {
-        venue: 'The O2 Arena',
-        geometry: {lat: 51.5073509, lon: -0.1277583},
-        styles: ['Heavy metal', 'thrash metal'],
-        date: '2017-10-22',
-        location: 'London, England',
-        bandName: 'Metallica'
-      },
-      {
-        venue: 'The O2 Arena',
-        geometry: {lat: 51.5073509, lon: -0.1277583},
-        styles: ['Heavy metal', 'thrash metal'],
-        date: '2017-10-24',
-        location: 'London, England',
-        bandName: 'Metallica'
-      },
-      {
-        venue: 'The O3 Arena',
-        geometry: {lat: 51.5073509, lon: -0.1277583},
-        styles: ['Hip Hop', 'rap'],
-        date: '2017-10-23',
-        location: 'Amsterdam, Netherlands',
-        bandName: 'Eminem'
-    },
-    {
-        venue: 'The O3 Arena',
-        geometry: {lat: 51.5073509, lon: -0.1277583},
-        styles: ['Pop', 'Alternative'],
-        date: '2017-10-26',
-        location: 'Amsterdam, Netherlands',
-        bandName: 'Lady Gaga'
+    screen.log("      data_param: " + JSON.stringify(data));
+    var parsed_data;
+    if (data) {
+      screen.log("      refine_string: " + JSON.stringify(
+          JSON.parse(data.split("\'").join("\""))));
+      parsed_data = JSON.parse(data.split("\'").join("\""));
+    } else {
+      var test_data = [
+        {
+          venue: 'The O2 Arena',
+          geometry: {lat: 51.5073509, lon: -0.1277583},
+          styles: ['Heavy metal', 'thrash metal'],
+          date: '2017-10-22',
+          location: 'London, England',
+          bandName: 'Metallica'
+        },
+        {
+          venue: 'The O2 Arena',
+          geometry: {lat: 51.5073509, lon: -0.1277583},
+          styles: ['Heavy metal', 'thrash metal'],
+          date: '2017-10-24',
+          location: 'London, England',
+          bandName: 'Metallica'
+        },
+        {
+          venue: 'The O3 Arena',
+          geometry: {lat: 51.5073509, lon: -0.1277583},
+          styles: ['Hip Hop', 'rap'],
+          date: '2017-10-23',
+          location: 'Amsterdam, Netherlands',
+          bandName: 'Eminem'
+        },
+        {
+          venue: 'The O3 Arena',
+          geometry: {lat: 51.5073509, lon: -0.1277583},
+          styles: ['Pop', 'Alternative'],
+          date: '2017-10-26',
+          location: 'Amsterdam, Netherlands',
+          bandName: 'Lady Gaga'
+        },
+        {
+          venue: 'Test',
+          geometry: {lat: 51.5073509, lon: -0.1277583},
+          styles: ['Test'],
+          date: '2017-10-23',
+          location: 'Amsterdam, Netherlands',
+          bandName: 'Test'
+        }
+      ];
+      parsed_data = test_data;
     }
-    ];
-    var parsed_data = test_data;
 
-    //screen.log(JSON.stringify(parsed_data));
+    screen.log("      parsed_data: " + JSON.stringify(parsed_data));
 
-    var grouped_dates = {
-    };
+    var grouped_dates = {};
 
-    for (var i=0; i < parsed_data.length; i++) {
+    for (var i = 0; i < parsed_data.length; i++) {
       var item = parsed_data[i];
       if (!grouped_dates[item.bandName]) {
         grouped_dates[item.bandName] = [];
@@ -169,7 +179,7 @@ var MainView = new MAF.Class({
 
     var grouped_arr = [];
 
-    for(var key in grouped_dates) {
+    for (var key in grouped_dates) {
       grouped_arr.push({
         title: key,
         data: grouped_dates[key]
