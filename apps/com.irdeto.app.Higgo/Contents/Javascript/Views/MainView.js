@@ -10,6 +10,7 @@ var MainView = new MAF.Class({
   iotListener: function (evt) {
     if (evt.payload.e && evt.payload.e === "Higgo") {
       var data = JSON.stringify(evt.payload.meta.messages[0]);
+      screen.log(data);
       this.updateView(data);
     }
   },
@@ -112,6 +113,8 @@ var MainView = new MAF.Class({
 
   updateView: function (data) {
     //screen.log(JSON.stringify(data));
+    if (data)
+      screen.log(JSON.parse(data.split("\'").join("\"")));
 
     // var parsed_data = JSON.parse(data);
 
